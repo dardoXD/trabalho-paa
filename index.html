@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabalho de Projeto e Análise de Algoritmos</title>
+    <script src="js/chartist.min.js"></script>
+    <link href="css/chartist.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div class="ui top fixed inverted menu">
+    <a class="item">Técnica 1</a>
+    <a class="item">Técnica 2</a>
+</div>
+<br>
+<div class="ui inverted stripe segment">
+    <div class="ui grid centered container">
+        <div class="row">
+            <div class="ui center aligned column">
+                <h1 class="ui inverted header">Algoritmos de ordenação</h1>
+                <h1 class="ui inverted header">Bubble Sort</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <form class="ui inverted form">
+                <div class="field">
+                    <input type="number" name="n1" id="n1">
+                </div>
+                <div class="field">
+                    <input type="button" class="ui inverted button" onclick="atualizarGrafico()" value="Adicionar valor">
+                </div>
+
+                <div class="field">
+                    <button class="ui inverted button" onclick="atualizarGrafico()">Ordenar</button>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="ct-chart ct-golden-section"></div>
+        </div>
+
+        <script type="application/javascript">
+            dados = [];
+
+            function atualizarGrafico() {
+                dados.push(document.getElementById("n1").value);
+                new Chartist.Bar('.ct-chart', {
+                    labels: dados,
+                    series: [
+                        dados
+                    ]
+                }, {
+                    seriesBarDistance: 15,
+                    axisX: {
+                        showGrid: false
+                    },
+                    axisY: {
+                        position: false
+                    }
+                });
+            }
+
+        </script>
+
+        <div class="ui inverted vertical footer segment">
+            <div class="ui grid container">
+                <div class="ui column">
+               <h3 class="ui inverted header">UNIVERSIDADE FEDERAL DE SÃO CARLOS<br>Departamento de Computação<br>
+                Projeto e Análise de Algoritmos - 2016/2</h3>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
