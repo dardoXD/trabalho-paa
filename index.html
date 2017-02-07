@@ -16,11 +16,10 @@
 </div>
 <br>
 <div class="ui inverted stripe segment">
-    <div class="ui grid centered container">
+    <div class="ui grid centered">
         <div class="row">
             <div class="ui center aligned column">
-                <h1 class="ui inverted header">Algoritmos de ordenação</h1>
-                <h1 class="ui inverted header">Bubble Sort</h1>
+                <h1 class="ui inverted header">Algoritmos de ordenação - Insertion Sort</h1>
             </div>
         </div>
 
@@ -30,11 +29,30 @@
                     <input type="number" name="n1" id="n1">
                 </div>
                 <div class="field">
-                    <input type="button" class="ui inverted button" onclick="atualizarGrafico()" value="Adicionar valor">
+                    <input type="button" class="ui inverted button" onclick="adicionarElemento()"
+                           value="Adicionar elemento">
+                </div>
+                <div class="inline fields">
+                    <div class="field">
+                        <input type="button" class="ui inverted button" onclick="embaralharElementos()"
+                               value="Embaralhar dados iniciais">
+                    </div>
+                    <div class="field">
+                        <input type="button" class="ui inverted button" onclick="removerUltimoElemento()"
+                               value="Remover último adicionado">
+                    </div>
+                    <div class="field">
+                        <input type="button" class="ui inverted button" onclick="removerElemento()"
+                               value="Remover especificado">
+                    </div>
+                    <div class="field">
+                        <input type="button" class="ui inverted button" onclick="limparGrafico()"
+                               value="Limpar tudo">
+                    </div>
                 </div>
 
                 <div class="field">
-                    <button class="ui inverted button" onclick="atualizarGrafico()">Ordenar</button>
+                    <input type="button" class="ui huge inverted button" onclick="ordernar()" value="Ordenar">
                 </div>
 
             </form>
@@ -45,10 +63,58 @@
         </div>
 
         <script type="application/javascript">
-            dados = [];
+            dados = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            dados = dados.reverse();
+            desenharGrafico();
+//            dados = [];
 
-            function atualizarGrafico() {
+            function adicionarElemento() {
                 dados.push(document.getElementById("n1").value);
+                desenharGrafico();
+            }
+
+            function limparGrafico() {
+                dados = [];
+            }
+
+            function embaralharElementos() {
+                for (var i = dados.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var aux = dados[i];
+                    dados[i] = dados[j];
+                    dados[j] = aux;
+                }
+                desenharGrafico();
+            }
+
+            function removerElemento() {
+                index = dados.indexOf(document.getElementById("n1").value);
+                if (index > -1) {
+                    dados.splice(index, 1);
+                }
+                desenharGrafico();
+            }
+
+            function removerUltimoElemento() {
+                dados.pop();
+                desenharGrafico()
+            }
+
+            function ordernar() {
+                for (i = 1; i < dados.length; i++) {
+                    j = i;
+                    while (j > 0 && dados[j - 1] > dados[j]) {
+                        aux = dados[j];
+                        dados[j] = dados[j-1];
+                        dados[j-1] = aux;
+                        j--;
+                        console.log(dados);
+                    }
+                }
+                desenharGrafico();
+            }
+
+            function desenharGrafico() {
                 new Chartist.Bar('.ct-chart', {
                     labels: dados,
                     series: [
@@ -64,19 +130,17 @@
                     }
                 });
             }
-
         </script>
 
         <div class="ui inverted vertical footer segment">
             <div class="ui grid container">
                 <div class="ui column">
-               <h3 class="ui inverted header">UNIVERSIDADE FEDERAL DE SÃO CARLOS<br>Departamento de Computação<br>
-                Projeto e Análise de Algoritmos - 2016/2</h3>
-            </div>
+                    <h3 class="ui inverted header">UNIVERSIDADE FEDERAL DE SÃO CARLOS<br>Departamento de Computação<br>
+                        Projeto e Análise de Algoritmos - 2016/2</h3>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
