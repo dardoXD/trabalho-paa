@@ -1,16 +1,7 @@
-.destaque {
-    stroke: red;
+.ui.inverted.header.rodape_h3 {
+    margin-bottom: 0;
 }
 
-.ct-chart {
-    height: 500px;
-}
-.ct-chart .ct-bar {
-    stroke-width: 30px;
-    stroke: deepskyblue;
-}
-.ct-chart .ct-label.ct-horizontal {
-    text-align: center;
-    color: #FFF;
-    font-size: 1.3em;
+.ui.inverted.header.rodape_h4 {
+    margin-top: 0;
 }
