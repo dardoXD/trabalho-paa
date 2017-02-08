@@ -65,8 +65,8 @@
         <script type="application/javascript">
             dados = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
             dados = dados.reverse();
-            desenharGrafico();
-//            dados = [];
+            max = 15;
+            desenharGrafico()
 
             function adicionarElemento() {
                 dados.push(document.getElementById("n1").value);
@@ -75,6 +75,7 @@
 
             function limparGrafico() {
                 dados = [];
+                desenharGrafico();
             }
 
             function embaralharElementos() {
@@ -100,22 +101,127 @@
                 desenharGrafico()
             }
 
+            function sleep(milliseconds) {
+                var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds){
+                        break;
+                    }
+                }
+            }
+
             function ordernar() {
+
+                i = -1;
+                j = -1;
+
+//                grafico = desenharGrafico();
+                grafico = new Chartist.Bar('.ct-chart', {
+                    labels: dados,
+                    series: [
+                        dados
+                    ]
+                }, {
+                    seriesBarDistance: 15,
+                    axisX: {
+                        showGrid: false
+                    },
+                    axisY: {
+                        position: false
+                    }
+                }).on('draw', function(context) {
+
+//                            console.log(context);
+                    // First we want to make sure that only do something when the draw event is for bars. Draw events do get fired for labels and grids too.
+                    if(context.type === 'bar') {
+                        console.log("context.index");
+                        console.log(context.index);
+                        console.log("i");
+                        console.log(i);
+                        if (context.index == i || context.index == j) {
+                            // With the Chartist.Svg API we can easily set an attribute on our bar that just got drawn
+                            context.element.attr({
+                                // Now we set the style attribute on our bar to override the default color of the bar. By using a HSL colour we can easily set the hue of the colour dynamically while keeping the same saturation and lightness. From the context we can also get the current value of the bar. We use that value to calculate a hue between 0 and 100 degree. This will make our bars appear green when close to the maximum and red when close to zero.
+                                style: 'stroke: red;'
+                            });
+
+//                            context.element.label()
+//                        }
+                        }
+                    } });
+
                 for (i = 1; i < dados.length; i++) {
                     j = i;
                     while (j > 0 && dados[j - 1] > dados[j]) {
                         aux = dados[j];
-                        dados[j] = dados[j-1];
-                        dados[j-1] = aux;
+                        dados[j] = dados[j - 1];
+                        dados[j - 1] = aux;
                         j--;
-                        console.log(dados);
+//                        grafico.update(dados);
+
+
+//
+//                        console.log(document.getElementsByClassName("ct-bar"));
+//                        bar1 = document.getElementsByClassName("ct-bar")[i];
+//                        bar2 = document.getElementsByClassName("ct-bar")[j];
+//                        console.log(bar1);
+//                        console.log(bar2);
+//
+//                        bar1.className += "destaque";
+//                        bar2.className += "destaque";
+
+
+
+//                        grafico.createAndShow();
+                        grafico.show();
+
+//                        var start = new Date().getTime();
+//                        for (var k = 0; k < 1e7; k++) {
+//                            if ((new Date().getTime() - start) > 1000){
+//                                break;
+//                            }
+//                        }
+
+//                        desenharGrafico2(i, j);
                     }
                 }
-                desenharGrafico();
             }
 
+
+            function desenharGrafico2(i, j) {
+                return new Chartist.Bar('.ct-chart', {
+                    labels: dados,
+                    series: [
+                        dados
+                    ]
+                }, {
+                    seriesBarDistance: 15,
+                    axisX: {
+                        showGrid: false
+                    },
+                    axisY: {
+                        position: false
+                    }
+                }).on('draw', function(context) {
+//                            console.log(context);
+                    // First we want to make sure that only do something when the draw event is for bars. Draw events do get fired for labels and grids too.
+                    if(context.type === 'bar') {
+                        console.log("context.index");
+                        console.log(context.index);
+                        console.log("i");
+                        console.log(i);
+                        if (context.index == i || context.index == j) {
+                            // With the Chartist.Svg API we can easily set an attribute on our bar that just got drawn
+                            context.element.attr({
+                                // Now we set the style attribute on our bar to override the default color of the bar. By using a HSL colour we can easily set the hue of the colour dynamically while keeping the same saturation and lightness. From the context we can also get the current value of the bar. We use that value to calculate a hue between 0 and 100 degree. This will make our bars appear green when close to the maximum and red when close to zero.
+                                style: 'stroke: red;'
+                            });
+                        }
+                    }
+                });
+            }
             function desenharGrafico() {
-                new Chartist.Bar('.ct-chart', {
+                return new Chartist.Bar('.ct-chart', {
                     labels: dados,
                     series: [
                         dados
@@ -129,7 +235,19 @@
                         position: false
                     }
                 });
+
+//                    .on('draw', function(context) {
+//                    // First we want to make sure that only do something when the draw event is for bars. Draw events do get fired for labels and grids too.
+//                    if(context.type === 'bar') {
+//                        // With the Chartist.Svg API we can easily set an attribute on our bar that just got drawn
+//                        context.element.attr({
+//                            // Now we set the style attribute on our bar to override the default color of the bar. By using a HSL colour we can easily set the hue of the colour dynamically while keeping the same saturation and lightness. From the context we can also get the current value of the bar. We use that value to calculate a hue between 0 and 100 degree. This will make our bars appear green when close to the maximum and red when close to zero.
+//                            style: 'stroke: hsl(' + Math.floor(Chartist.getMultiValue(context.value) / max * 100) + ', 50%, 50%);'
+//                        });
+//                    }
+//                });
             }
+
         </script>
 
         <div class="ui inverted vertical footer segment">

@@ -1,3 +1,7 @@
+.destaque {
+    stroke: red;
+}
+
 .ct-chart {
     height: 500px;
 }
