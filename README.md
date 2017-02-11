@@ -17,7 +17,7 @@ Basta abrir o arquivo `index.html` no Google Chrome versão 55 ou superior. Por 
 
 ## Teste sem baixar
 
-Acesse [https://marcelodeolive1ra.github.io/trabalho-paa/]() no Google Chrome 55+.
+Acesse [https://marcelodeolive1ra.github.io/trabalho-paa/](https://marcelodeolive1ra.github.io/trabalho-paa/) no Google Chrome 55+.
 
 ## Créditos de uso de bibliotecas de código aberto
 - Semantic UI 2.2.7 ([http://semantic-ui.com]())
